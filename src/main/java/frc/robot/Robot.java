@@ -5,7 +5,14 @@
 
 package frc.robot;
 
+import com.pathplanner.lib.auto.AutoBuilder;
+import com.pathplanner.lib.auto.NamedCommands;
+
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj.util.Color8Bit;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 
@@ -32,6 +39,10 @@ public class Robot extends TimedRobot
         // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
         // autonomous chooser on the dashboard.
         robotContainer = new RobotContainer();
+
+        SmartDashboard.putNumber("LED_R", 0);
+        SmartDashboard.putNumber("LED_G", 0);
+        SmartDashboard.putNumber("LED_B", 0);
     }
     
     
@@ -55,11 +66,20 @@ public class Robot extends TimedRobot
     
     /** This method is called once each time the robot enters Disabled mode. */
     @Override
-    public void disabledInit() {}
-    
-    
+    public void disabledInit() {
+
+    }
+
     @Override
-    public void disabledPeriodic() {}
+    public void disabledPeriodic() {
+        robotContainer.ledStrip.usePattern((_1, _2) -> new Color8Bit(
+                (int) SmartDashboard.getNumber("LED_R", 0) & 255,
+                (int) SmartDashboard.getNumber("LED_G", 0) & 255,
+                (int) SmartDashboard.getNumber("LED_B", 0) & 255
+        ));
+
+        SmartDashboard.putString("matchTime", "0");
+    }
     
     
     /** This autonomous runs the autonomous command selected by your {@link RobotContainer} class. */
@@ -78,7 +98,9 @@ public class Robot extends TimedRobot
     
     /** This method is called periodically during autonomous. */
     @Override
-    public void autonomousPeriodic() {}
+    public void autonomousPeriodic() {
+        SmartDashboard.putString("matchTime", "%d".formatted((int) Timer.getMatchTime()));
+    }
     
     
     @Override
@@ -97,7 +119,9 @@ public class Robot extends TimedRobot
     
     /** This method is called periodically during operator control. */
     @Override
-    public void teleopPeriodic() {}
+    public void teleopPeriodic() {
+        SmartDashboard.putString("matchTime", "%d".formatted((int) Timer.getMatchTime()));
+    }
     
     
     @Override

@@ -13,8 +13,8 @@ public class DriveCommand extends Command {
     private final DriveSubsystem drive;
     private final OI oi;
 
-    private final SlewRateLimiter speedLimiter = new SlewRateLimiter(10000);
-	private final SlewRateLimiter rotationLimiter = new SlewRateLimiter(10);
+    private final SlewRateLimiter rotationLimiter = new SlewRateLimiter(10);
+	private final SlewRateLimiter speedLimiter = new SlewRateLimiter(3);
 
     public DriveCommand(DriveSubsystem drive, OI oi) {
         this.drive = drive;
@@ -32,8 +32,8 @@ public class DriveCommand extends Command {
     @Override
     public void execute() {
         drive.arcadeDrive(
-        -speedLimiter.calculate(oi.getAxis(0, Axes.LEFT_STICK_Y)) * Constants.DRIVE_SPEED,
-        rotationLimiter.calculate(oi.getAxis(0, Axes.RIGHT_STICK_X)) * Constants.ROTATION_SENSITIVITY
+        -rotationLimiter.calculate(oi.getAxis(0, Axes.LEFT_STICK_Y)) * Constants.DRIVE_SPEED,
+        speedLimiter.calculate(oi.getAxis(0, Axes.RIGHT_STICK_X)) * Constants.ROTATION_SENSITIVITY
         );
     }
 

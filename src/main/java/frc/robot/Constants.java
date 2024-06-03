@@ -41,29 +41,10 @@ public final class Constants {
 	public static double rightRate = 0;
 	public static boolean moveshoot=false;
 
-	//Subject to change
-	public static final double ksVolts=0.65019;//0.69874;//0.66099;
-	public static final double kvVoltSecondsPerMeter = 0.013915;//0.012955;//0.026728;
-    public static final double kaVoltSecondsSquaredPerMeter = 0.0033668;//0.0028624;//0.0028603;
-	public static final double kPDriveVel = 0.12992;
-	//Subject to change
-
-	public static final double kTrackwidthMeters = 0.665;
-    public static final DifferentialDriveKinematics kDriveKinematics =
-        new DifferentialDriveKinematics(kTrackwidthMeters);
-	public static final double kMaxSpeedMetersPerSecond = 3.5;
-    public static final double kMaxAccelerationMetersPerSecondSquared = 3.5;
-	public static final double kRamseteB = 3.5;//2 3.5
-    public static final double kRamseteZeta = 5;//0.7
-
-public static boolean pushballs = false;
-
-public static boolean turning = true;
-
     public static final double DEADZONE_VALUE = 0.01;
 	public static final int NUMBER_OF_CONTROLLERS = 2;
 
-	public static final double DRIVE_SPEED = 0.8; //0.85;
+	public static final double DRIVE_SPEED = 0.85; //0.85;
 	public static final double ROTATION_SENSITIVITY = 0.65; //0.85;
     
     public enum Axes {
