@@ -3,7 +3,6 @@ package frc.robot.subsystems;
 import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.SPI;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import network.Network;
 
@@ -40,6 +39,6 @@ public class NavX extends SubsystemBase {
 
     @Override
     public void periodic() {
-        Network.getTable("SmartDashboard").setString("heading", "%.2fdeg".formatted(getRotation2d().getDegrees()));
+        Network.getTable("SmartDashboard").setString("heading", "%.2f deg".formatted(getRotation2d().getDegrees()));
     }
 }

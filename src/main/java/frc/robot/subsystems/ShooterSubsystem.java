@@ -1,31 +1,46 @@
 package frc.robot.subsystems;
 
+import com.ctre.phoenix6.configs.CurrentLimitsConfigs;
 import com.ctre.phoenix6.hardware.TalonFX;
 import com.ctre.phoenix6.signals.NeutralModeValue;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
-import network.Network;
 
 public class ShooterSubsystem extends SubsystemBase {
-    private final TalonFX shooterMotor;
+    private final TalonFX ShooterMotor = new TalonFX(Constants.ShooterMotor);
 
     public ShooterSubsystem() {
-        shooterMotor = new TalonFX(Constants.ShooterMotor);
-        shooterMotor.setNeutralMode(NeutralModeValue.Coast);
-        shooterMotor.setInverted(true);
+        ShooterMotor.setNeutralMode(NeutralModeValue.Coast);
+        ShooterMotor.getConfigurator().apply(new CurrentLimitsConfigs().withStatorCurrentLimit(4));
     }
 
-    public void run() {
-        shooterMotor.setVoltage(16);
+    public void setShooter(double speed) {
+        if (!Constants.climbing) {
+            //ShooterMotor.set(speed);
+            ShooterMotor.set(-0.4);//switched from negative
+
+        } else {
+            ShooterMotor.set(0);
+        }
     }
 
-    public void stop() {
-        shooterMotor.setVoltage(0);
+    public void setShooterVolt(double volts) {
+        ShooterMotor.setVoltage(-volts);
     }
 
-    @Override
-    public void periodic() {
-        Network.getTable("SmartDashboard").setDouble("Shooter speed", shooterMotor.getVelocity().getValue());
-        Network.getTable("SmartDashboard").setDouble("Shooter pos", shooterMotor.getPosition().getValue());
+    public void stopShooter() {
+        ShooterMotor.set(0);
+    }
+
+    public double getRate() {
+        return ((-ShooterMotor.getVelocity().getValue()));
+    }
+
+    public void startClimbing() {
+        Constants.climbing = true;
+    }
+
+    public void stopClimbing() {
+        Constants.climbing = false;
     }
 }

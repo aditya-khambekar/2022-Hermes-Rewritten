@@ -20,6 +20,6 @@ public class PhasingLEDPattern implements LEDPattern {
         double green = color.green;
         double blue = color.blue;
 
-        return new Color8Bit((int)(red * factor), (int)(green * factor), (int)(blue * factor));
+        return new Color8Bit((int) (red * factor), (int) (green * factor), (int) (blue * factor));
     }
 }

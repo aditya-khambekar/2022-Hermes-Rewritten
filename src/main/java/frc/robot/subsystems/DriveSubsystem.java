@@ -1,41 +1,40 @@
 package frc.robot.subsystems;
 
-import com.ctre.phoenix.motorcontrol.NeutralMode;
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import com.ctre.phoenix6.controls.Follower;
+import com.ctre.phoenix6.hardware.TalonFX;
 import com.ctre.phoenix6.signals.NeutralModeValue;
-import edu.wpi.first.math.filter.SlewRateLimiter;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class DriveSubsystem extends SubsystemBase {
-    @SuppressWarnings("removal")
-    public final WPI_TalonFX FrontLeft = new WPI_TalonFX(Constants.DriveMotorFrontLeft);
-    @SuppressWarnings("removal")
-    public final WPI_TalonFX BackLeft = new WPI_TalonFX(Constants.DriveMotorBackLeft);
-    @SuppressWarnings("removal")
-    public final WPI_TalonFX FrontRight = new WPI_TalonFX(Constants.DriveMotorFrontRight);
-    @SuppressWarnings("removal")
-    public final WPI_TalonFX BackRight = new WPI_TalonFX(Constants.DriveMotorBackRight);
+
+    public final TalonFX FrontLeft = new TalonFX(Constants.DriveMotorFrontLeft);
+    public final TalonFX BackLeft = new TalonFX(Constants.DriveMotorBackLeft);
+    public final TalonFX FrontRight = new TalonFX(Constants.DriveMotorFrontRight);
+    public final TalonFX BackRight = new TalonFX(Constants.DriveMotorBackRight);
+
     private final DifferentialDrive drive;
 
     public DriveSubsystem() {
-        FrontLeft.setNeutralMode(NeutralMode.Brake);
-        BackLeft.setNeutralMode(NeutralMode.Brake);
-        FrontRight.setNeutralMode(NeutralMode.Brake);
-        BackRight.setNeutralMode(NeutralMode.Brake);
+        FrontLeft.setNeutralMode(NeutralModeValue.Brake);
+        BackLeft.setNeutralMode(NeutralModeValue.Brake);
+        FrontRight.setNeutralMode(NeutralModeValue.Brake);
+        BackRight.setNeutralMode(NeutralModeValue.Brake);
 
-        BackLeft.follow(FrontLeft);
-        BackRight.follow(FrontRight);
+        FrontRight.setInverted(true);
+
+        BackLeft.setControl(new Follower(Constants.DriveMotorFrontLeft, false));
+        BackRight.setControl(new Follower(Constants.DriveMotorFrontRight, false));
 
         drive = new DifferentialDrive(FrontLeft, FrontRight);
-        drive.setSafetyEnabled(false);
+//        drive.setSafetyEnabled(false);
     }
 
     public void arcadeDrive(double speed, double rotation) {
         drive.arcadeDrive(speed, rotation);
     }
+
     public void stop() {
         drive.stopMotor();
     }

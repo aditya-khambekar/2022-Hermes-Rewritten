@@ -4,7 +4,9 @@
 
 package frc.robot;
 
-import edu.wpi.first.math.kinematics.DifferentialDriveKinematics;
+import edu.wpi.first.wpilibj.util.Color;
+import edu.wpi.first.wpilibj.util.Color8Bit;
+import frc.robot.led.LEDPattern;
 
 /**
  * The Constants class provides a convenient place for teams to hold robot-wide numerical or boolean
@@ -15,65 +17,34 @@ import edu.wpi.first.math.kinematics.DifferentialDriveKinematics;
  * constants are needed, to reduce verbosity.
  */
 public final class Constants {
-	public static final int DriveMotorFrontLeft = 1;
-	public static final int DriveMotorBackLeft=2;
-	public static final int DriveMotorFrontRight=3;
-	public static final int DriveMotorBackRight=4;
-	public static final int IntakeMotor = 9;
-	public static final int HopperMotor=8;
-	public static final int FeedMotor=7;
-	public static final int TurretMotor=10;	//Need to update this value
-	public static final int ShooterMotor=6;	//Need to update this value
-	public static final int ShroudMotor=5;	//Need to update this value
-	public static final int LClimberMotor=11;
-	public static final int RClimberMotor=12;
+    public static final int DriveMotorFrontLeft = 1;
+    public static final int DriveMotorBackLeft = 2;
+    public static final int DriveMotorFrontRight = 3;
+    public static final int DriveMotorBackRight = 4;
+    public static final int ShooterMotor = 6;
+    public static final int FeedMotor = 7;
+    public static final int HopperMotor = 8;
+    public static final int IntakeMotor = 9;
+    public static final int LClimberMotor = 11;
+    public static final int RClimberMotor = 12;
 
-	public static boolean climbing=false;
+    public static boolean climbing = false;
 
-	public static final int ForwardPiston= 1;
-	public static final int BackwardPiston =2;
+    public static final int ForwardPiston = 1;
 
-	public static final int feederSensor=1;
-
-	public static final double climberspeeed = 0.9;
-
-	public static double leftRate = 0;
-	public static double rightRate = 0;
-	public static boolean moveshoot=false;
+    public static final int feederSensor = 1;
 
     public static final double DEADZONE_VALUE = 0.01;
-	public static final int NUMBER_OF_CONTROLLERS = 2;
 
-	public static final double DRIVE_SPEED = 0.85; //0.85;
-	public static final double ROTATION_SENSITIVITY = 0.65; //0.85;
-    
-    public enum Axes {
-		LEFT_STICK_X(0), LEFT_STICK_Y(4), LEFT_TRIGGER(2), RIGHT_TRIGGER(3), RIGHT_STICK_X(1), RIGHT_STICK_Y(5);
+    public static final double DRIVE_SPEED = 0.80;
+    public static final double ROTATION_SENSITIVITY = 0.8;
 
-		private final int value;
+    public static final LEDPattern LED_IdlePattern = (led, time) -> {
+        time *= 2;
+        double x = led * 0.2 + time * 3;
+        double h = 20 * Math.pow(Math.sin(x), 2) + 90;
+        double v = Math.pow(Math.sin(time), 2) * 0.9 + 0.1;
 
-		Axes(int value) {
-			this.value = value;
-		}
-
-		public int getValue() {
-			return value;
-		}
-	}
-
-	public enum Buttons {
-		A_BUTTON(1), B_BUTTON(2), X_BUTTON(3), Y_BUTTON(4), LEFT_BUMPER(5), RIGHT_BUMPER(6), BACK_BUTTON(
-				7), START_BUTTON(8), LEFT_STICK(9), RIGHT_STICK(10);
-
-		private final int value;
-
-		private Buttons(int value) {
-			this.value = value;
-		}
-
-		public int getValue() {
-			return value;
-		}
-
-	}   
+        return new Color8Bit(Color.fromHSV((int) (h), 255, (int) (255 * v)));
+    };
 }

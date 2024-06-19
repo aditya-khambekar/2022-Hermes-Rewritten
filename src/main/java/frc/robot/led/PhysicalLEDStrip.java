@@ -13,7 +13,7 @@ public class PhysicalLEDStrip extends SubsystemBase implements LEDStrip {
 
     private LEDPattern currentPattern = LEDPattern.BLANK;
 
-    public PhysicalLEDStrip(int port, int length){
+    public PhysicalLEDStrip(int port, int length) {
         this.length = length;
 
         led = new AddressableLED(port);
@@ -25,13 +25,13 @@ public class PhysicalLEDStrip extends SubsystemBase implements LEDStrip {
     }
 
     @Override
-    public void usePattern(LEDPattern pattern){
+    public void usePattern(LEDPattern pattern) {
         currentPattern = pattern;
     }
 
     @Override
     public void update() {
-        for(int i = 0; i < length; i++){
+        for (int i = 0; i < length; i++) {
             Color8Bit color = currentPattern.get(i, Timer.getFPGATimestamp());
             buffer.setLED(i, color);
         }

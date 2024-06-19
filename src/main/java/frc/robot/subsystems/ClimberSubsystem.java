@@ -11,9 +11,9 @@ public class ClimberSubsystem extends SubsystemBase {
     private final WPI_VictorSPX leftClimberMotor = new WPI_VictorSPX(Constants.LClimberMotor);
     private final WPI_VictorSPX rightClimberMotor = new WPI_VictorSPX(Constants.RClimberMotor);
 
-    public Solenoid climberSolenoid = new Solenoid(PneumaticsModuleType.CTREPCM, 7);
+    public final Solenoid climberSolenoid = new Solenoid(PneumaticsModuleType.CTREPCM, 7);
 
-    public ClimberSubsystem(){
+    public ClimberSubsystem() {
         leftClimberMotor.configFactoryDefault();
         rightClimberMotor.configFactoryDefault();
 
@@ -21,26 +21,28 @@ public class ClimberSubsystem extends SubsystemBase {
         rightClimberMotor.setNeutralMode(NeutralMode.Brake);
     }
 
-    public void setClimber(double leftSpeed, double rightSpeed){
+    public void setClimber(double leftSpeed, double rightSpeed) {
         leftClimberMotor.set(leftSpeed);
         rightClimberMotor.set(rightSpeed);
     }
 
-    public void setLeftClimber(double leftSpeed){
+    public void setLeftClimber(double leftSpeed) {
         leftClimberMotor.set(leftSpeed);
     }
-    public void setRightClimber(double rightSpeed){
+
+    public void setRightClimber(double rightSpeed) {
         rightClimberMotor.set(rightSpeed);
     }
 
-    public void extendPistons(){
+    public void extendPistons() {
         climberSolenoid.set(true);
     }
-    public void retractPistons(){
+
+    public void retractPistons() {
         climberSolenoid.set(false);
     }
 
-    public void stopClimber(){
+    public void stopClimber() {
         leftClimberMotor.set(0);
         rightClimberMotor.set(0);
     }
