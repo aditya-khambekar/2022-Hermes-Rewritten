@@ -4,7 +4,6 @@ import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import network.Network;
 
 /**
  * Encapsulates the NavX on the robot. Use this class for determining
@@ -35,10 +34,5 @@ public class NavX extends SubsystemBase {
 
     public void reset() {
         ahrs.reset();
-    }
-
-    @Override
-    public void periodic() {
-        Network.getTable("SmartDashboard").setString("heading", "%.2f deg".formatted(getRotation2d().getDegrees()));
     }
 }
