@@ -70,7 +70,11 @@ public class Controller {
         return buttons[button.getID()];
     }
 
-    public void rumble(double strength) {
+    public void setRumble(double strength) {
         stick.setRumble(GenericHID.RumbleType.kBothRumble, strength);
+    }
+
+    public void stopRumble() {
+        stick.setRumble(GenericHID.RumbleType.kBothRumble, 0);
     }
 }

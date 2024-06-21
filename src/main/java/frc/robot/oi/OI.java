@@ -81,17 +81,14 @@ public class OI {
         }
     }
 
-
+    // Only one instance of OI can exist at a time, and it should be accessible from
+    // anywhere using getInstance()
     private static OI instance = null;
+
     public static OI getInstance() {
-        if(instance != null) {
+        if (instance != null) {
             return instance;
         }
         return instance = new OI();
-    }
-
-    public void onDisable() {
-        driverController.rumble(0);
-        operatorController.rumble(0);
     }
 }
