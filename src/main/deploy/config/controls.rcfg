@@ -1,0 +1,5 @@
+robot {
+    controls {
+        DEADZONE_VALUE = 0.01
+    }
+}

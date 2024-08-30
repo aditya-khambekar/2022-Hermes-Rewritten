@@ -1,6 +1,7 @@
-package frc.robot.led;
+package frc.robot.led.patterns;
 
 import edu.wpi.first.wpilibj.util.Color8Bit;
+import frc.robot.led.LEDPattern;
 
 public class PhasingLEDPattern implements LEDPattern {
     private final Color8Bit color;

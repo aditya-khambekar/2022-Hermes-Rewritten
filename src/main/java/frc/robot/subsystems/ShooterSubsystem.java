@@ -15,17 +15,7 @@ public class ShooterSubsystem extends SubsystemBase {
     }
 
     public void setShooter(double speed) {
-        if (!Constants.climbing) {
-            //ShooterMotor.set(speed);
-            ShooterMotor.set(-0.4);//switched from negative
-
-        } else {
-            ShooterMotor.set(0);
-        }
-    }
-
-    public void setShooterVolt(double volts) {
-        ShooterMotor.setVoltage(-volts);
+        ShooterMotor.set(-speed);
     }
 
     public void stopShooter() {
@@ -36,11 +26,4 @@ public class ShooterSubsystem extends SubsystemBase {
         return ((-ShooterMotor.getVelocity().getValue()));
     }
 
-    public void startClimbing() {
-        Constants.climbing = true;
-    }
-
-    public void stopClimbing() {
-        Constants.climbing = false;
-    }
 }

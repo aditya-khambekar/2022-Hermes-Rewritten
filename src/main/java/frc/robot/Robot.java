@@ -6,15 +6,19 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.util.Color8Bit;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import frc.robot.tuning.RobotConfiguration;
 
 public class Robot extends TimedRobot {
     private Command autonomousCommand;
 
     private RobotContainer robotContainer;
 
+    public static RobotConfiguration robotConfiguration;
+
     @Override
     public void robotInit() {
         robotContainer = new RobotContainer();
+        robotConfiguration = new RobotConfiguration("config/robot.rcfg", "config/controls.rcfg");
     }
 
     @Override

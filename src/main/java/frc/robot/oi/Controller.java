@@ -18,7 +18,7 @@ public class Controller {
     private final Joystick stick;
     private final Trigger[] buttons;
 
-    public Controller(int joystickID) {
+    Controller(int joystickID) {
         stick = new Joystick(joystickID);
 
         buttons = new Trigger[NUM_BUTTONS + NUM_POV_BUTTONS + NUM_SPECIAL_BUTTONS];
