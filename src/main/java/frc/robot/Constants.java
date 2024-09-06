@@ -28,8 +28,6 @@ public final class Constants {
     public static final int LClimberMotor = 11;
     public static final int RClimberMotor = 12;
 
-    public static boolean climbing = false;
-
     public static final int ForwardPiston = 1;
 
     public static final int feederSensor = 1;

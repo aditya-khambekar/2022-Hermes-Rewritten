@@ -20,5 +20,15 @@ robot {
 
     DRIVE_SPEED = 0.80
     ROTATION_SENSITIVITY = 0.8
-    INTAKE_SPEED = 0.4
+    INTAKE_SPEED ?= 0.6
+
+
+    ShooterSetPointTable ?= [
+        pos  : left : right ;
+        -1   : 0.0  : 0.5  ;
+        -0.5 : 0.5  : 0.3  ;
+        0    : 0.0  : -0.2 ;
+        0.5  : -1   : 0.1  ;
+        1    : -0.5 : 0.0  ;
+    ]
 }

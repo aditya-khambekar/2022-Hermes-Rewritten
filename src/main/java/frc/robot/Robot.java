@@ -13,16 +13,14 @@ public class Robot extends TimedRobot {
 
     private RobotContainer robotContainer;
 
-    public static RobotConfiguration robotConfiguration;
-
     @Override
     public void robotInit() {
         robotContainer = new RobotContainer();
-        robotConfiguration = new RobotConfiguration("config/robot.rcfg", "config/controls.rcfg");
     }
 
     @Override
     public void robotPeriodic() {
+        RobotConfiguration.updateAll();
         CommandScheduler.getInstance().run();
     }
 
