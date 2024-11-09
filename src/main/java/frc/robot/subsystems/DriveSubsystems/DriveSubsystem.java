@@ -1,5 +1,6 @@
 package frc.robot.subsystems.DriveSubsystems;
 
+import com.ctre.phoenix6.configs.CurrentLimitsConfigs;
 import com.ctre.phoenix6.controls.Follower;
 import com.ctre.phoenix6.hardware.TalonFX;
 import com.ctre.phoenix6.signals.NeutralModeValue;
@@ -21,6 +22,23 @@ public class DriveSubsystem extends SubsystemBase {
         BackLeft.setNeutralMode(NeutralModeValue.Brake);
         FrontRight.setNeutralMode(NeutralModeValue.Brake);
         BackRight.setNeutralMode(NeutralModeValue.Brake);
+
+        //set current limits
+        var limitConfigs = new CurrentLimitsConfigs();
+        limitConfigs.StatorCurrentLimit = 100; //stator current limit
+        limitConfigs.SupplyCurrentLimit = 40; //supply current limit
+        limitConfigs.StatorCurrentLimitEnable = true;
+        limitConfigs.SupplyCurrentLimitEnable = true;
+
+        var flConfig = FrontLeft.getConfigurator();
+        var frConfig = FrontRight.getConfigurator();
+        var brConfig = BackRight.getConfigurator();
+        var blConfig = BackLeft.getConfigurator();
+
+        flConfig.apply(limitConfigs);
+        frConfig.apply(limitConfigs);
+        brConfig.apply(limitConfigs);
+        blConfig.apply(limitConfigs);
 
         //ask @Nengyi-Jonathan-Jiang about this I dont think it needs to be inverted???
         FrontRight.setInverted(true);
