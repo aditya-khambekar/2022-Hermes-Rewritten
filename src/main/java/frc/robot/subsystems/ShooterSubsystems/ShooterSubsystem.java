@@ -11,6 +11,15 @@ public class ShooterSubsystem extends SubsystemBase implements IShooterSubsystem
 
     public ShooterSubsystem() {
         ShooterMotor.setNeutralMode(NeutralModeValue.Coast);
+        //set current limits
+        var limitConfigs = new CurrentLimitsConfigs();
+        limitConfigs.StatorCurrentLimit = 50; //stator current limit
+        limitConfigs.SupplyCurrentLimit = 30; //supply current limit
+        limitConfigs.StatorCurrentLimitEnable = true;
+        limitConfigs.SupplyCurrentLimitEnable = true;
+        var shooterConfig = ShooterMotor.getConfigurator();
+        shooterConfig.apply(limitConfigs);
+
         ShooterMotor.getConfigurator().apply(new CurrentLimitsConfigs().withStatorCurrentLimit(4));
     }
     @Override
