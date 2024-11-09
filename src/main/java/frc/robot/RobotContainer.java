@@ -10,6 +10,7 @@ import frc.robot.oi.OI;
 import frc.robot.subsystems.*;
 import frc.robot.subsystems.DriveSubsystems.DriveSubsystem;
 import frc.robot.subsystems.ShooterSubsystems.ShooterSubsystem;
+import frc.robot.subsystems.ShooterSubsystems.VortexShooter;
 import frc.robot.tuning.RobotConfiguration;
 import frc.robot.tuning.TableSource;
 
@@ -19,7 +20,8 @@ public class RobotContainer {
     private final NavX navx = new NavX();
     private final OI oi = OI.getInstance();
     public final LEDStrip ledStrip = new PhysicalLEDStrip(0, 96);
-    private final ShooterSubsystem shooterSubsystem = new ShooterSubsystem();
+    private final VortexShooter shooterSubsystem = new VortexShooter();
+    //private final ShooterSubsystem shooterSubsystem = new ShooterSubsystem();
     private final IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
     private final FeederSubsystem feederSubsystem = new FeederSubsystem();
     private final HopperSubsystem hopperSubsystem = new HopperSubsystem();

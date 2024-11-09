@@ -3,18 +3,20 @@ package frc.robot.commands;
 import edu.wpi.first.math.controller.BangBangController;
 import edu.wpi.first.math.controller.SimpleMotorFeedforward;
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.subsystems.ShooterSubsystems.IShooterSubsystem;
 import frc.robot.subsystems.ShooterSubsystems.ShooterSubsystem;
+import frc.robot.subsystems.ShooterSubsystems.VortexShooter;
 
 public class ShootCommand extends Command {
-    private final ShooterSubsystem shooter;
+    private final IShooterSubsystem shooter;
     private final SimpleMotorFeedforward feedforward = new SimpleMotorFeedforward(0.64665, 0.10772, 0.037027);
     private final BangBangController shooterBang = new BangBangController(5);
     private static final double desiredSpeed = 100;
 
-    public ShootCommand(ShooterSubsystem shooter) {
+    public ShootCommand(IShooterSubsystem shooter) {
         this.shooter = shooter;
 
-        addRequirements(shooter);
+        addRequirements((VortexShooter)shooter);
     }
 
     public double calculate() {
