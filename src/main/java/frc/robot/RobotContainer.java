@@ -8,6 +8,7 @@ import frc.robot.led.LEDStrip;
 import frc.robot.led.PhysicalLEDStrip;
 import frc.robot.oi.OI;
 import frc.robot.subsystems.*;
+import frc.robot.subsystems.ShooterSubsystems.ShooterSubsystem;
 import frc.robot.tuning.RobotConfiguration;
 import frc.robot.tuning.TableSource;
 
