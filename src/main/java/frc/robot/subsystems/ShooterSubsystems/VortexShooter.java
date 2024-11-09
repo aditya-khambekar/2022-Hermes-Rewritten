@@ -5,7 +5,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import com.revrobotics.CANSparkFlex;
 
 public class VortexShooter extends SubsystemBase implements IShooterSubsystem {
-    //private final SparkFlex ShooterMotor 
+    private final CANSparkFlex ShooterMotor;
 
     @Override
     public void setShooter(double speed) {
