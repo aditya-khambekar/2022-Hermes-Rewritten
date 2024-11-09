@@ -18,10 +18,14 @@ public class DriveSubsystem extends SubsystemBase {
     private final DifferentialDrive drive;
 
     public DriveSubsystem() {
-        FrontLeft.setNeutralMode(NeutralModeValue.Brake);
-        BackLeft.setNeutralMode(NeutralModeValue.Brake);
-        FrontRight.setNeutralMode(NeutralModeValue.Brake);
-        BackRight.setNeutralMode(NeutralModeValue.Brake);
+        //FrontLeft.setNeutralMode(NeutralModeValue.Brake);
+        //BackLeft.setNeutralMode(NeutralModeValue.Brake);
+        //FrontRight.setNeutralMode(NeutralModeValue.Brake);
+        //BackRight.setNeutralMode(NeutralModeValue.Brake);
+        FrontLeft.setNeutralMode(NeutralModeValue.Coast);
+        BackLeft.setNeutralMode(NeutralModeValue.Coast);   
+        FrontRight.setNeutralMode(NeutralModeValue.Coast);
+        BackRight.setNeutralMode(NeutralModeValue.Coast);
 
         //set current limits
         var limitConfigs = new CurrentLimitsConfigs();
@@ -39,6 +43,7 @@ public class DriveSubsystem extends SubsystemBase {
         frConfig.apply(limitConfigs);
         brConfig.apply(limitConfigs);
         blConfig.apply(limitConfigs);
+
 
         //ask @Nengyi-Jonathan-Jiang about this I dont think it needs to be inverted???
         FrontRight.setInverted(true);

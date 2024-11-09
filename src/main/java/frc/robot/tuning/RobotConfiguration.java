@@ -5,7 +5,8 @@ import edu.wpi.first.wpilibj.Filesystem;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
 
 public final class RobotConfiguration {
     private static final String basePath = Filesystem.getDeployDirectory().getPath();
@@ -22,8 +23,8 @@ public final class RobotConfiguration {
         }
     }
 
-    public static void updateAll(){
-        
+    public static void updateAll() {
+        values.values().forEach(ValueSource::update);
     }
 
     public static NumberSource getNumber(String key) {

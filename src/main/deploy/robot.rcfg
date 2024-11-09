@@ -1,0 +1,6 @@
+shooter {
+    targetSpeed ?= 3000.0
+    kp ?= 0.0005
+    ki ?= 0.00005
+    kd ?= 0
+}

@@ -6,6 +6,8 @@ import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.ShooterSubsystems.IShooterSubsystem;
 import frc.robot.subsystems.ShooterSubsystems.ShooterSubsystem;
 import frc.robot.subsystems.ShooterSubsystems.VortexShooter;
+import frc.robot.tuning.RobotConfiguration;
+import frc.robot.tuning.TunableTableSource;
 
 public class ShootCommand extends Command {
     private final IShooterSubsystem shooter;
@@ -19,10 +21,6 @@ public class ShootCommand extends Command {
         addRequirements((VortexShooter)shooter);
     }
 
-    public double calculate() {
-        return shooterBang.calculate(shooter.getRate(), desiredSpeed) * 2 + 0.0006 * feedforward.calculate(desiredSpeed);
-    }
-
     @Override
     public void initialize() {
         shooter.setShooter(0);
@@ -30,7 +28,7 @@ public class ShootCommand extends Command {
 
     @Override
     public void execute() {
-        shooter.setShooter(calculate());
+        shooter.setShooter(RobotConfiguration.getNumber("shooter.targetSpeed").valueAsDouble());
     }
 
     @Override

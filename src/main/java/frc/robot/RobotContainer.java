@@ -3,6 +3,7 @@ package frc.robot;
 import edu.wpi.first.math.interpolation.InterpolatingDoubleTreeMap;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.RunCommand;
+import edu.wpi.first.wpilibj2.command.sysid.SysIdRoutine.Direction;
 import frc.robot.commands.*;
 import frc.robot.led.LEDStrip;
 import frc.robot.led.PhysicalLEDStrip;
@@ -26,6 +27,10 @@ public class RobotContainer {
     private final FeederSubsystem feederSubsystem = new FeederSubsystem();
     private final HopperSubsystem hopperSubsystem = new HopperSubsystem();
 
+    static {
+        RobotConfiguration.loadFile("robot.rcfg");
+    }
+
     public RobotContainer() {
         loadConfigFiles();
         configureBindings();
@@ -37,51 +42,17 @@ public class RobotContainer {
     }
 
     private void configureBindings() {
-//        driveSubsystem.setDefaultCommand(new DriveCommand(driveSubsystem));
+       driveSubsystem.setDefaultCommand(new DriveCommand(driveSubsystem));
 //
-//        if(false)
-        {
-            InterpolatingDoubleTreeMap interpolatorLeft = new InterpolatingDoubleTreeMap();
-            InterpolatingDoubleTreeMap interpolatorRight = new InterpolatingDoubleTreeMap();
-            {
-                TableSource table = RobotConfiguration.getTable("robot.ShooterSetPointTable");
-                for (int row = 0; row < table.numRows(); row++) {
-                    double point = table.getCellAsDouble(row, 0);
-                    double left = table.getCellAsDouble(row, 1);
-                    double right = table.getCellAsDouble(row, 2);
-
-                    interpolatorLeft.put(point, left);
-                    interpolatorRight.put(point, right);
-                }
-                table.addListener((row, col, value) -> {
-                    switch (col) {
-                        case 1 -> interpolatorLeft.put(table.getCellAsDouble(row, 0), value);
-                        case 2 -> interpolatorRight.put(table.getCellAsDouble(row, 0), value);
-                    }
-                });
-            }
-
-            driveSubsystem.setDefaultCommand(new Command() {
-                {
-                    addRequirements(driveSubsystem);
-                }
-
-                @Override
-                public void execute() {
-                    double axis = oi.driverController().axis(OI.Axes.LEFT_STICK_Y);
-
-                    double left = interpolatorLeft.get(axis);
-                    double right = interpolatorRight.get(axis);
-
-                    driveSubsystem.tankDrive(left, right);
-                }
-            });
-        }
-
         oi.driverController().button(OI.Buttons.D_PAD_UP).whileTrue(new ClimbCommand(climberSubsystem, 1, 1));
         oi.driverController().button(OI.Buttons.D_PAD_DOWN).whileTrue(new ClimbCommand(climberSubsystem, -1, -1));
         oi.driverController().button(OI.Buttons.D_PAD_LEFT).whileTrue(new ClimbCommand(climberSubsystem, -1, 1));
         oi.driverController().button(OI.Buttons.D_PAD_RIGHT).whileTrue(new ClimbCommand(climberSubsystem, 1, -1));
+
+        // oi.driverController().button(OI.Buttons.D_PAD_UP).whileTrue(shooterSubsystem.sysidQuasistatic(Direction.kForward));
+        // oi.driverController().button(OI.Buttons.D_PAD_DOWN).whileTrue(shooterSubsystem.sysidQuasistatic(Direction.kReverse));
+        // oi.driverController().button(OI.Buttons.D_PAD_LEFT).whileTrue(shooterSubsystem.sysidDynamic(Direction.kForward));
+        // oi.driverController().button(OI.Buttons.D_PAD_RIGHT).whileTrue(shooterSubsystem.sysidDynamic(Direction.kReverse));
 
         oi.driverController().button(OI.Buttons.X_BUTTON).whileTrue(new IntakeCommand(intakeSubsystem, hopperSubsystem));
         oi.driverController().button(OI.Buttons.B_BUTTON).whileTrue(new OutTakeCommand(intakeSubsystem, hopperSubsystem));

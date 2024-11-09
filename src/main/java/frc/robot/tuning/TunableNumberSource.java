@@ -33,7 +33,7 @@ public class TunableNumberSource implements NumberSource {
     @Override
     public void update() {
         double value = valueAsDouble();
-        if(value != lastValue) {
+        if (value != lastValue) {
             lastValue = value;
             listeners.forEach(l -> l.accept(value));
         }
