@@ -1,4 +1,4 @@
-package frc.robot.subsystems;
+package frc.robot.subsystems.DriveSubsystems;
 
 import com.ctre.phoenix6.controls.Follower;
 import com.ctre.phoenix6.hardware.TalonFX;
@@ -22,6 +22,7 @@ public class DriveSubsystem extends SubsystemBase {
         FrontRight.setNeutralMode(NeutralModeValue.Brake);
         BackRight.setNeutralMode(NeutralModeValue.Brake);
 
+        //ask @Nengyi-Jonathan-Jiang about this I dont think it needs to be inverted???
         FrontRight.setInverted(true);
 
         BackLeft.setControl(new Follower(Constants.DriveMotorFrontLeft, false));
