@@ -15,7 +15,6 @@ public class ShootCommand extends Command {
 
     public ShootCommand(IShooterSubsystem shooter) {
         this.shooter = shooter;
-
         addRequirements((VortexShooter)shooter);
     }
 
