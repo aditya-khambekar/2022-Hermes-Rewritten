@@ -15,7 +15,10 @@ public class ShootCommand extends Command {
 
     public ShootCommand(IShooterSubsystem shooter) {
         this.shooter = shooter;
-        addRequirements((VortexShooter)shooter);
+        switch(shooter.getClass().getName()){
+            case "frc.robot.subsystems.ShooterSubsystems.VortexShooter" -> addRequirements((VortexShooter)shooter);
+            case "frc.robot.subsystems.ShooterSubsystems.ShooterSubsystem" -> addRequirements((ShooterSubsystem)shooter);
+        }
     }
 
     public double calculate() {
