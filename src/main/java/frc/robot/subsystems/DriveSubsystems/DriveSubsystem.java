@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
-public class DriveSubsystem extends SubsystemBase {
+public class DriveSubsystem extends SubsystemBase implements IDriveSubsystem{
 
     public final TalonFX FrontLeft = new TalonFX(Constants.DriveMotorFrontLeft);
     public final TalonFX BackLeft = new TalonFX(Constants.DriveMotorBackLeft);
@@ -54,15 +54,15 @@ public class DriveSubsystem extends SubsystemBase {
         drive = new DifferentialDrive(FrontLeft, FrontRight);
 //        drive.setSafetyEnabled(false);
     }
-
+    @Override
     public void arcadeDrive(double speed, double rotation) {
         drive.arcadeDrive(speed, rotation);
     }
-
+    @Override
     public void tankDrive(double left, double right) {
         drive.tankDrive(left, right);
     }
-
+    @Override
     public void stop() {
         drive.stopMotor();
     }
