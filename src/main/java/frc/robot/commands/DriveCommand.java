@@ -5,19 +5,22 @@ import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants;
 import frc.robot.oi.OI;
 import frc.robot.subsystems.DriveSubsystems.DriveSubsystem;
+import frc.robot.subsystems.DriveSubsystems.IDriveSubsystem;
 
 public class DriveCommand extends Command {
 
-    private final DriveSubsystem drive;
+    private final IDriveSubsystem drive;
     private final OI oi = OI.getInstance();
 
     private final SlewRateLimiter rotationLimiter = new SlewRateLimiter(3);
     private final SlewRateLimiter speedLimiter = new SlewRateLimiter(7);
 
-    public DriveCommand(DriveSubsystem drive) {
+    public DriveCommand(IDriveSubsystem drive) {
         this.drive = drive;
-
-        addRequirements(drive);
+        switch(drive.getClass().getName()){
+            case "frc.robot.subsystems.DriveSubsystems.DriveSubsystem"->addRequirements((DriveSubsystem)drive);
+        }
+        //addRequirements(drive);
     }
 
     @Override
