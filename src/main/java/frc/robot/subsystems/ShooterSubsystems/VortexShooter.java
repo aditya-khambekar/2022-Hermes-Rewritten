@@ -28,8 +28,10 @@ public class VortexShooter extends SubsystemBase implements IShooterSubsystem {
 //               this));
 
     public VortexShooter() {
-        ShooterMotor.setIdleMode(IdleMode.kCoast);
         //still need to configure the spark flex's current limits
+        ShooterMotor.restoreFactoryDefaults();
+        ShooterMotor.setIdleMode(IdleMode.kCoast);
+        //PID stuff
         ShooterPID.setP(RobotConfiguration.getNumber("shooter.kp").valueAsDouble());
         ShooterPID.setI(RobotConfiguration.getNumber("shooter.ki").valueAsDouble());
         ShooterPID.setD(RobotConfiguration.getNumber("shooter.kd").valueAsDouble());
