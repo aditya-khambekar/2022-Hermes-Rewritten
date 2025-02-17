@@ -34,7 +34,7 @@ public final class Constants {
 
     public static final double DEADZONE_VALUE = 0.01;
 
-    public static final double DRIVE_SPEED = 0.80;
+    public static final double DRIVE_SPEED = 0.60;
     public static final double ROTATION_SENSITIVITY = 0.5;
 
     public static final LEDPattern LED_IdlePattern = (led, time) -> {

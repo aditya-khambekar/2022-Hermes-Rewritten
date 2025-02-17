@@ -1,12 +1,14 @@
 package frc.robot;
 
 import edu.wpi.first.math.interpolation.InterpolatingDoubleTreeMap;
+import edu.wpi.first.wpilibj.util.Color8Bit;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.sysid.SysIdRoutine.Direction;
 import frc.robot.commands.*;
 import frc.robot.led.LEDStrip;
 import frc.robot.led.PhysicalLEDStrip;
+import frc.robot.led.patterns.BasicLEDPattern;
 import frc.robot.oi.OI;
 import frc.robot.subsystems.*;
 import frc.robot.subsystems.DriveSubsystems.DriveSubsystem;
@@ -42,7 +44,7 @@ public class RobotContainer {
     }
 
     private void configureBindings() {
-       driveSubsystem.setDefaultCommand(new DriveCommand(driveSubsystem));
+        driveSubsystem.setDefaultCommand(new DriveCommand(driveSubsystem));
 //
         oi.driverController().button(OI.Buttons.D_PAD_UP).whileTrue(new ClimbCommand(climberSubsystem, 1, 1));
         oi.driverController().button(OI.Buttons.D_PAD_DOWN).whileTrue(new ClimbCommand(climberSubsystem, -1, -1));

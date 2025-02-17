@@ -45,7 +45,6 @@ public class VortexShooter extends SubsystemBase implements IShooterSubsystem {
         double currentSpeed = Math.abs(ShooterMotor.getEncoder().getVelocity());
         SmartDashboard.putNumber("current shooter speed", currentSpeed);
 
-
 //        ShooterPID.setP(RobotConfiguration.getNumber("shooter.kp").valueAsDouble());
 //        ShooterPID.setI(RobotConfiguration.getNumber("shooter.ki").valueAsDouble());
 //        ShooterPID.setD(RobotConfiguration.getNumber("shooter.kd").valueAsDouble());
